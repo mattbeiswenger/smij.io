@@ -1,17 +1,21 @@
 {
-  "name": "url-shortener-next",
-  "version": "0.1.0",
+  "name": "smij",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
     "@types/node": "20.4.5",
     "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7",
+    "@upstash/ratelimit": "^0.4.3",
+    "@upstash/redis": "^1.22.0",
     "autoprefixer": "10.4.14",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
@@ -19,7 +23,40 @@
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.2",
+    "request-ip": "^3.3.0",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "zod": "^3.21.4",
+    "zod-form-data": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/request-ip": "^0.0.38",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.4"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "next",
+      "next/core-web-vitals",
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 90,
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ]
   }
 }

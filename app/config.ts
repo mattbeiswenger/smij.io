@@ -1,17 +1,20 @@
 interface Env {
   REDIS_URL: string | undefined
   REDIS_TOKEN: string | undefined
+  HOSTNAME: string | undefined
 }
 
 interface Config {
   REDIS_URL: string
   REDIS_TOKEN: string
+  HOSTNAME: string
 }
 
 const getConfig = (): Env => {
   return {
     REDIS_URL: process.env.REDIS_URL,
     REDIS_TOKEN: process.env.REDIS_TOKEN,
+    HOSTNAME: process.env.HOSTNAME,
   }
 }
 

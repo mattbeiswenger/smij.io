@@ -1,22 +1,16 @@
+'use server'
+
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { cookies } from 'next/headers'
 import { Ratelimit } from '@upstash/ratelimit'
-import { Redis } from '@upstash/redis'
 import { z } from 'zod'
 import { zfd } from 'zod-form-data'
-import config from '../../utils/config'
-import base62 from '../../utils/base62'
-import { getIp } from '../../utils/get-ip'
-
-export const runtime = 'edge'
+import { v4 as uuidv4 } from 'uuid'
+import { revalidatePath } from 'next/cache'
+import { redis, base62, getIp } from './utils'
 
 const schema = zfd.formData({
   url: zfd.text(z.string().url('Invalid URL')),
-})
-
-const redis = new Redis({
-  url: config.REDIS_URL,
-  token: config.REDIS_TOKEN,
 })
 
 // Cache must exist outside of serverless function handler
@@ -31,15 +25,24 @@ const ratelimit = new Ratelimit({
   ephemeralCache: cache,
 })
 
-export async function POST(request: NextRequest) {
-  const ipAddress = getIp(request)
+const getSessionId = () => {
+  const sessionId = cookies().get('session-id')
+  if (sessionId) {
+    return sessionId
+  }
+  const uuid = uuidv4()
+  cookies().set('session-id', uuid)
+  return uuid
+}
+
+export async function shorten(formData: FormData) {
+  const ipAddress = getIp()
   if (ipAddress) {
     const { success, reset } = await ratelimit.limit(ipAddress)
     if (success) {
-      const data = await request.formData()
       let parsedData
       try {
-        parsedData = schema.parse(data)
+        parsedData = schema.parse(formData)
       } catch (e) {
         return new NextResponse('Invalid request parameters', { status: 400 })
       }
@@ -54,8 +57,12 @@ export async function POST(request: NextRequest) {
         if (!ok) {
           keyNotUnique = false
           console.warn(`Key ${hash} already exists`)
+        } else {
+          const sessionId = getSessionId()
+          await redis.sadd(`session:${sessionId}`, hash)
         }
       }
+      revalidatePath('/')
     } else {
       return new NextResponse('Rate limit exceeded', {
         status: 429,

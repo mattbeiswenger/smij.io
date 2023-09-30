@@ -68,7 +68,9 @@ new Elysia()
     {
       type: "application/x-www-form-urlencoded",
       body: t.Object({
-        url: t.RegExp("^(https?|ftp)://[^s/$.?#].[^s]*$"),
+        url: t.RegExp(
+          "https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
+        ),
       }),
       cookie,
     }

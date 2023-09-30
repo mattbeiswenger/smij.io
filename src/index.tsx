@@ -26,7 +26,7 @@ new Elysia()
         userSession.set({ value: sessionId });
       }
       const shortenedUrls = sessionId
-        ? await redis.smembers(`session:${sessionId}`)
+        ? await redis.zrange(`session:${sessionId}`, 0, -1, "REV")
         : [];
 
       return html(
@@ -58,7 +58,7 @@ new Elysia()
         const hash = base62.encode(count);
         const p = redis.pipeline();
         p.setnx(hash, url);
-        p.sadd(`session:${sessionId}`, hash);
+        p.zadd(`session:${sessionId}`, Date.now(), hash);
         await p.exec();
         return <ShortenedUrl url={`${config.HOSTNAME}/${hash}`} />;
       }
@@ -79,7 +79,6 @@ new Elysia()
     "/:hash",
     async ({ params: { hash }, set }) => {
       const url = await redis.get(hash);
-      console.log(hash, url);
       if (url) {
         set.redirect = url;
       } else {

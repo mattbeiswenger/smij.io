@@ -6,7 +6,7 @@ export function Form({ children }: elements.Children) {
       class="flex w-full max-w-xs flex-col items-center gap-3"
       hx-post={`/shorten`}
       hx-target="#shortened-urls"
-      hx-swap="beforeend"
+      hx-swap="afterbegin"
     >
       <input
         name="url"

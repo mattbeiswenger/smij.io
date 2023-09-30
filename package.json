@@ -1,15 +1,21 @@
 {
   "name": "smij",
-  "version": "1.0.50",
+  "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "concurrently \"bun run --watch src/index.tsx\" \"bun run tw:dev\"",
+    "tw": "bunx tailwindcss -i ./src/styles.css -o ./tailwind-gen/styles.css",
+    "tw:dev": "bunx tailwindcss -i ./src/styles.css -o ./tailwind-gen/styles.css --watch"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/html": "^0.7.0",
+    "@upstash/ratelimit": "^0.4.4",
+    "elysia": "latest",
+    "ioredis": "^5.3.2"
   },
   "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+    "bun-types": "latest",
+    "concurrently": "^8.2.1",
+    "tailwindcss": "^3.3.3",
+    "typed-html": "^3.0.1"
+  }
 }

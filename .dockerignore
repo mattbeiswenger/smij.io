@@ -1,0 +1,5 @@
+/node_modules
+/tailwind-gen
+*.md
+Dockerfile
+fly.toml

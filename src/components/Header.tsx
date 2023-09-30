@@ -7,7 +7,7 @@ export function Header({ children }: elements.Children) {
         <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-800">
           🔗
         </div>
-        <h1 class="text-2xl font-extrabold tracking-wider text-neutral-300 sm:mb-2 sm:text-4xl">
+        <h1 class="text-2xl font-extrabold tracking-wider text-neutral-300 sm:text-4xl">
           SMIJ
         </h1>
       </div>

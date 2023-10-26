@@ -2,7 +2,7 @@
 
 This project is a simple url shortener created as a proof of concept for highly performant, hypermedia-driven applications within JavaScript. The stack is based on the [BETH stack](https://github.com/ethanniser/the-beth-stack) and uses the following technologies:
 - [Bun](https://bun.sh/) for runtime and package manager
-- [Elysia](https://elysia.dev/) for server-side rendering
+- [Elysia](https://elysiajs.com/) for server-side rendering
 - [Redis](https://redis.io/) (instead of [Turso](https://turso.tech/)) for data storage
 - [htmx](https://htmx.org/) for hypermedia-driven client rendering
 

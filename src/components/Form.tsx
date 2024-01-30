@@ -3,7 +3,7 @@ import * as elements from "typed-html";
 export function Form({ children }: elements.Children) {
   return (
     <form
-      class="flex w-full max-w-xs flex-col items-center gap-3"
+      class="flex w-full flex-col items-center gap-3"
       hx-post={`/shorten`}
       hx-target="#shortened-urls"
       hx-swap="afterbegin"

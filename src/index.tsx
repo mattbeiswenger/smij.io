@@ -4,7 +4,6 @@ import { html } from "@elysiajs/html";
 import { redis, ratelimit } from "./redis";
 import { randomUUID } from "node:crypto";
 import { BaseHtml } from "./components/BaseHtml";
-import { Form } from "./components/Form";
 import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
 import { ShortenedUrl } from "./components/ShortenedUrl";
@@ -32,13 +31,14 @@ new Elysia()
       return html(
         <BaseHtml>
           <Layout>
-            <Header />
-            <Form />
-            <ul id="shortened-urls" class="flex w-full max-w-xs flex-col gap-2">
-              {shortenedUrls.map((url) => (
-                <ShortenedUrl url={`${config.HOSTNAME}/${url}`} />
-              ))}
-            </ul>
+            <div class="grid md:grid-cols-2 grid-cols-1 w-full justify-between lg:gap-36 md:gap-24 gap-10">
+              <Header />
+              <ul id="shortened-urls" class="flex w-full flex-col gap-2">
+                {shortenedUrls.map((url) => (
+                  <ShortenedUrl url={`${config.HOSTNAME}/${url}`} />
+                ))}
+              </ul>
+            </div>
           </Layout>
         </BaseHtml>
       );

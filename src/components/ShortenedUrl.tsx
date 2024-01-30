@@ -7,7 +7,7 @@ type Props = {
 
 export function ShortenedUrl({ url }: Props) {
   return (
-    <div class="flex items-center justify-between rounded-md border border-neutral-600 bg-neutral-800 p-2">
+    <div class="flex w-full items-center justify-between rounded-md border border-neutral-600 bg-neutral-800 p-2">
       <a
         href={
           process.env.NODE_ENV === "production"

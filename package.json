@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@elysiajs/html": "^0.8.0",
-    "@upstash/ratelimit": "^0.4.4",
+    "@upstash/ratelimit": "^1.0.0",
     "elysia": "latest",
     "ioredis": "^5.3.2"
   },

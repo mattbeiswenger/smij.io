@@ -11,12 +11,12 @@
     "skipLibCheck": true,
     "jsx": "react",
     "jsxFactory": "elements.createElement",
+    "jsxFragmentFactory": "Html.Fragment",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "noEmit": true,
-    "types": [
-      "bun-types" // add Bun global
-    ]
+    "plugins": [{ "name": "@kitajs/ts-html-plugin" }],
+    "types": ["bun-types"]
   }
 }

@@ -18,7 +18,7 @@ export function Form({ children }: elements.Children) {
       />
       <button
         type="submit"
-        class="h-10 w-full rounded-md border border-neutral-700 bg-neutral-800 px-4 text-neutral-100 shadow-sm"
+        class="h-10 w-full rounded-md border border-neutral-700 transition-colors hover:border-neutral-600 hover:text-neutral-200 hover:bg-[#333333] bg-neutral-800 px-4 text-neutral-300 shadow-sm"
       >
         Shorten
       </button>

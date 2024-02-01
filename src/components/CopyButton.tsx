@@ -1,9 +1,9 @@
-import * as elements from "typed-html";
-import { CopySvg } from "./CopySvg";
+import * as elements from 'typed-html'
+import { CopySvg } from './CopySvg'
 
 type Props = {
-  value: string;
-};
+  value: string
+}
 
 export function CopyButton({ value }: Props) {
   return (
@@ -13,5 +13,5 @@ export function CopyButton({ value }: Props) {
     >
       <CopySvg />
     </button>
-  );
+  )
 }

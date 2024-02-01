@@ -1,4 +1,4 @@
-import * as elements from "typed-html";
+import * as elements from 'typed-html'
 
 export function BaseHtml({ children }: elements.Children) {
   return `
@@ -15,5 +15,5 @@ export function BaseHtml({ children }: elements.Children) {
 </head>
 
 ${children}
-`;
+`
 }

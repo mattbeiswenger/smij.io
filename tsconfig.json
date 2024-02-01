@@ -17,6 +17,6 @@
     "allowJs": true,
     "noEmit": true,
     "plugins": [{ "name": "@kitajs/ts-html-plugin" }],
-    "types": ["bun-types"]
-  }
+    "types": ["bun-types"],
+  },
 }

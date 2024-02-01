@@ -1,16 +1,16 @@
-import * as elements from "typed-html";
-import { CopyButton } from "./CopyButton";
+import * as elements from 'typed-html'
+import { CopyButton } from './CopyButton'
 
 type Props = {
-  url: string;
-};
+  url: string
+}
 
 export function ShortenedUrl({ url }: Props) {
   return (
-    <div class="pl-4 flex w-full items-center justify-between rounded-md border border-neutral-600 bg-neutral-800 p-2">
+    <div class="flex w-full items-center justify-between rounded-md border border-neutral-600 bg-neutral-800 p-2 pl-4">
       <a
         href={
-          process.env.NODE_ENV === "production"
+          process.env.NODE_ENV === 'production'
             ? `https://${url}`
             : `http://${url}`
         }
@@ -23,5 +23,5 @@ export function ShortenedUrl({ url }: Props) {
       </a>
       <CopyButton value={url} />
     </div>
-  );
+  )
 }

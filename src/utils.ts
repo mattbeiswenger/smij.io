@@ -2,14 +2,14 @@
  * Helper function to base62 encode a number for use as a hash
  */
 const CHARACTERS =
-  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 export const base62 = {
   encode: (num: number): string => {
-    let result = "";
+    let result = ''
     while (num > 0) {
-      result = CHARACTERS[num % CHARACTERS.length] + result;
-      num = Math.floor(num / CHARACTERS.length);
+      result = CHARACTERS[num % CHARACTERS.length] + result
+      num = Math.floor(num / CHARACTERS.length)
     }
-    return result;
+    return result
   },
-};
+}

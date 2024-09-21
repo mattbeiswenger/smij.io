@@ -1,0 +1,20 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1.2.2
+        with:
+          node-version: '20'
+      - run: bun install -g typescript@5
+      - run: bun install
+      - run: tsc

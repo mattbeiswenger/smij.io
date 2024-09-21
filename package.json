@@ -10,7 +10,7 @@
   "dependencies": {
     "@elysiajs/html": "^1.1.1",
     "@kitajs/ts-html-plugin": "^4.1.0",
-    "@upstash/ratelimit": "^1.0.0",
+    "@upstash/ratelimit": "^2.0.0",
     "@upstash/redis": "^1.34.0",
     "elysia": "^1.1.13"
   },

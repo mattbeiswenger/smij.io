@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1.1.1
+      - uses: oven-sh/setup-bun@v1.2.2
         with:
           node-version: '20'
       - run: bun install -g typescript@5

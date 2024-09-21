@@ -43,3 +43,6 @@ yarn-error.log*
 **/*.log
 package-lock.json
 **/*.bun
+
+# vscode
+.vscode

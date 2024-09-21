@@ -1,7 +1,7 @@
-import * as elements from 'typed-html'
+import { Html } from '@elysiajs/html'
 import { Form } from './Form'
 
-export function Header({ children }: elements.Children) {
+export function Header() {
   return (
     <div class="flex w-full flex-col gap-10">
       <header class="w-full">

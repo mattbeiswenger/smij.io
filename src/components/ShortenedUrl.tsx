@@ -1,5 +1,5 @@
-import * as elements from 'typed-html'
 import { CopyButton } from './CopyButton'
+import { Html } from '@elysiajs/html'
 
 type Props = {
   url: string

@@ -56,7 +56,7 @@ new Elysia()
     }) => {
       const { value: sessionId } = userSession
       const ip = server?.requestIP(request)
-      // Use either the session id or ip for rate limiting. 
+      // Use either the session id or ip for rate limiting.
       // Fallback to "session" if neither is available.
       const identifier = sessionId ?? ip?.address ?? 'session'
       const { success } = await ratelimit.limit(identifier)
@@ -87,7 +87,7 @@ new Elysia()
     async ({ params: { hash }, set }) => {
       const url: string | null = await redis.get(hash)
       if (url) {
-        redirect(url)
+        return redirect(url)
       } else {
         set.status = 404
         return 'Not found'

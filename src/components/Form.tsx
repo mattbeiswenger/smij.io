@@ -1,6 +1,6 @@
-import * as elements from 'typed-html'
+import { Html } from '@elysiajs/html'
 
-export function Form({ children }: elements.Children) {
+export function Form() {
   return (
     <form
       class="flex w-full flex-col items-center gap-3"

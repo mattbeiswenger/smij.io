@@ -1,6 +1,5 @@
-import * as elements from 'typed-html'
-import { Elysia, t } from 'elysia'
-import { html } from '@elysiajs/html'
+import { Elysia, redirect, t } from 'elysia'
+import { html, Html } from '@elysiajs/html'
 import { redis, ratelimit } from './redis'
 import { randomUUID } from 'node:crypto'
 import { BaseHtml } from './components/BaseHtml'
@@ -18,7 +17,7 @@ new Elysia()
   .use(html())
   .get(
     '/',
-    async ({ html, cookie: { userSession } }) => {
+    async ({ cookie: { userSession } }) => {
       let { value: sessionId } = userSession
       if (!sessionId) {
         sessionId = randomUUID()
@@ -29,7 +28,7 @@ new Elysia()
         ? await redis.zrange(`session:${sessionId}`, 0, -1, { rev: true })
         : []
 
-      return html(
+      return (
         <BaseHtml>
           <Layout>
             <div class="grid w-full grid-cols-1 justify-between gap-10 md:grid-cols-2 md:gap-24 lg:gap-36">
@@ -41,18 +40,25 @@ new Elysia()
               </ul>
             </div>
           </Layout>
-        </BaseHtml>,
+        </BaseHtml>
       )
     },
     { cookie },
   )
   .post(
     '/shorten',
-    async ({ body: { url }, cookie: { userSession }, set }) => {
+    async ({
+      body: { url },
+      cookie: { userSession },
+      set,
+      server,
+      request,
+    }) => {
       const { value: sessionId } = userSession
-      // Use hardcoded identifier if session id is not set
-      // Will update to use request ip once bun supports it
-      const identifier = sessionId ?? 'shorten'
+      const ip = server?.requestIP(request)
+      // Use either the session id or ip for rate limiting. 
+      // Fallback to "session" if neither is available.
+      const identifier = sessionId ?? ip?.address ?? 'session'
       const { success } = await ratelimit.limit(identifier)
       if (success) {
         const count = await redis.incr('count')
@@ -81,7 +87,7 @@ new Elysia()
     async ({ params: { hash }, set }) => {
       const url: string | null = await redis.get(hash)
       if (url) {
-        set.redirect = url
+        redirect(url)
       } else {
         set.status = 404
         return 'Not found'

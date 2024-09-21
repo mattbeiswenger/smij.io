@@ -1,4 +1,4 @@
-import * as elements from 'typed-html'
+import { Html } from '@elysiajs/html'
 import { CopySvg } from './CopySvg'
 
 type Props = {

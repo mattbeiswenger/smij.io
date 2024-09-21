@@ -1,17 +1,20 @@
 interface Env {
-  REDIS_URL: string | undefined
   HOSTNAME: string | undefined
+  UPSTASH_REDIS_REST_URL: string | undefined
+  UPSTASH_REDIS_REST_TOKEN: string | undefined
 }
 
 interface Config {
-  REDIS_URL: string
   HOSTNAME: string
+  UPSTASH_REDIS_REST_URL: string
+  UPSTASH_REDIS_REST_TOKEN: string
 }
 
 const getConfig = (): Env => {
   return {
-    REDIS_URL: process.env.REDIS_URL,
     HOSTNAME: process.env.HOSTNAME,
+    UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+    UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
   }
 }
 

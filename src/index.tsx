@@ -24,8 +24,9 @@ new Elysia()
         sessionId = randomUUID()
         userSession.set({ value: sessionId })
       }
-      const shortenedUrls = sessionId
-        ? await redis.zrange(`session:${sessionId}`, 0, -1, 'REV')
+
+      const shortenedUrls: string[] = sessionId
+        ? await redis.zrange(`session:${sessionId}`, 0, -1, { rev: true })
         : []
 
       return html(
@@ -58,7 +59,7 @@ new Elysia()
         const hash = base62.encode(count)
         const p = redis.pipeline()
         p.setnx(hash, url)
-        p.zadd(`session:${sessionId}`, Date.now(), hash)
+        p.zadd(`session:${sessionId}`, { score: Date.now(), member: hash })
         await p.exec()
         return <ShortenedUrl url={`${config.HOSTNAME}/${hash}`} />
       }
@@ -78,7 +79,7 @@ new Elysia()
   .get(
     '/:hash',
     async ({ params: { hash }, set }) => {
-      const url = await redis.get(hash)
+      const url: string | null = await redis.get(hash)
       if (url) {
         set.redirect = url
       } else {

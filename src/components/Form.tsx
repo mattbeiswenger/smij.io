@@ -13,7 +13,7 @@ export function Form() {
         type="url"
         placeholder="Enter a URL"
         class="h-10 w-full rounded-md border border-neutral-200 bg-neutral-200 px-3 text-neutral-900 outline-none placeholder:text-neutral-500"
-        required="true"
+        required={true}
         autofocus="true"
       />
       <button

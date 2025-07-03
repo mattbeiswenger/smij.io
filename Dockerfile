@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM oven/bun:1.2.17 as base
+FROM oven/bun:1.2.18 as base
 ENV NODE_ENV=production
 WORKDIR /app
 
